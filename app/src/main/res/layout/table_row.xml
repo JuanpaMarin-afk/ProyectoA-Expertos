@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/removeButton">
+
+
+    <TextView
+            android:id="@+id/usernameTextView"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#E4AFAF"
+            android:textSize="13sp"/>
+
+    <TextView
+            android:id="@+id/intelligenceTextView"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#E4AFAF"
+            android:textSize="13sp"/>
+
+
+
+</TableRow>
