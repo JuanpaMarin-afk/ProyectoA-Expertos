@@ -10,22 +10,16 @@ object Constants {
 
         // Question 1
         val que1 = Question(
-            1, "Question 1?",
-            "Yes", "No",
-            1
+            1, "Question 1?",0
         )
         questionsList.add(que1)
 
         // Question 2
         val que2 = Question(
-            2, "Question 2?",
-            "Yes", "No",
-            1
+            2, "Question 2?",0
         )
         questionsList.add(que2)
 
         return questionsList
     }
-    // END
 }
-// END

@@ -8,13 +8,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 
 class QuestionsActivity : AppCompatActivity(), OnClickListener {
+
+    val values = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
@@ -26,54 +25,49 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
 
+        //List Values 0 - 10
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, values)
+        spinner.adapter = arrayAdapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Toast.makeText(this@QuestionsActivity, "Opcion = " + values[position], Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
         mUserName = intent.getStringExtra(Constants.USER_NAME)
 
         mQuestionsList = Constants.getQuestions()
         setQuestion()
 
-        val tv_option_one = findViewById<TextView>(R.id.tv_option_one)
-        val tv_option_two = findViewById<TextView>(R.id.tv_option_two)
         val btn_submit = findViewById<Button>(R.id.btn_submit)
 
-        tv_option_one.setOnClickListener(this)
-        tv_option_two.setOnClickListener(this)
         btn_submit.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-
-        val tv_option_one = findViewById<TextView>(R.id.tv_option_one)
-        val tv_option_two = findViewById<TextView>(R.id.tv_option_two)
-        val btn_submit = findViewById<Button>(R.id.btn_submit)
         when (v?.id) {
-
-            R.id.tv_option_one -> {
-                selectedOptionView(tv_option_one, 1)
-            }
-
-            R.id.tv_option_two -> {
-                selectedOptionView(tv_option_two, 2)
-            }
-
             R.id.btn_submit -> {
-                if (mSelectedOptionPosition == 0) {
-                    Toast.makeText(this@QuestionsActivity, "Ingrese una opción!", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    mCurrentPosition++
-                    when {
-                        mCurrentPosition <= mQuestionsList!!.size -> {
-                            setQuestion()
-                        }
-                        else -> {
-                            val intent =
-                                Intent(this@QuestionsActivity, ResultActivity::class.java)
-                            intent.putExtra(Constants.USER_NAME, mUserName)
-                            startActivity(intent)
-                            finish()
-                        }
+                mCurrentPosition++
+                when {
+                    mCurrentPosition <= mQuestionsList!!.size -> {
+                        setQuestion()
+                    }
+
+                    else -> {
+                        val intent =
+                            Intent(this@QuestionsActivity, ResultActivity::class.java)
+                        intent.putExtra(Constants.USER_NAME, mUserName)
+                        startActivity(intent)
+                        finish()
                     }
                 }
+
             }
         }
     }
@@ -81,8 +75,6 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
     private fun setQuestion() {
         val question =
             mQuestionsList!!.get(mCurrentPosition - 1)
-
-        defaultOptionsView()
 
         val btn_submit = findViewById<Button>(R.id.btn_submit)
 
@@ -95,19 +87,14 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val tv_progress = findViewById<TextView>(R.id.tv_progress)
         val tv_question = findViewById<TextView>(R.id.tv_question)
-        val tv_option_one = findViewById<TextView>(R.id.tv_option_one)
-        val tv_option_two = findViewById<TextView>(R.id.tv_option_two)
 
         progressBar.progress = mCurrentPosition
         tv_progress.text = "$mCurrentPosition" + "/" + progressBar.getMax()
 
         tv_question.text = question.question
-        tv_option_one.text = question.optionOne
-        tv_option_two.text = question.optionTwo
     }
 
     private fun selectedOptionView(tv: TextView, selectedOptionNum: Int) {
-        defaultOptionsView()
         mSelectedOptionPosition = selectedOptionNum
         tv.setTextColor(
             Color.parseColor("#363A43")
@@ -119,21 +106,6 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
         )
     }
 
-    private fun defaultOptionsView() {
-        val tv_option_one = findViewById<TextView>(R.id.tv_option_one)
-        val tv_option_two = findViewById<TextView>(R.id.tv_option_two)
-        val options = ArrayList<TextView>()
-        options.add(0, tv_option_one)
-        options.add(1, tv_option_two)
 
-        for (option in options) {
-            option.setTextColor(Color.parseColor("#7A8089"))
-            option.typeface = Typeface.DEFAULT
-            option.background = ContextCompat.getDrawable(
-                this@QuestionsActivity,
-                R.drawable.default_option_border_bg
-            )
-        }
-    }
 
 }
