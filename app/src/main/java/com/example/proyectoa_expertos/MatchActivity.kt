@@ -16,6 +16,8 @@ class MatchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_match)
 
         val userName = intent.getStringExtra(Constants.USER_NAME)
+        val intelligence = intent.getStringExtra(Constants.INTELLIGENCE)
+        val score = intent.getStringExtra(Constants.SCORE)
         val tv_name = findViewById<TextView>(R.id.tv_name)
         tv_name.text = userName
 
@@ -24,11 +26,17 @@ class MatchActivity : AppCompatActivity() {
 
         val btn_back = findViewById<Button>(R.id.btn_back)
         btn_back.setOnClickListener {
-            startActivity(Intent(this@MatchActivity, ResultActivity::class.java))
+            val intent = Intent(this@MatchActivity, ResultActivity::class.java)
+            intent.putExtra(Constants.USER_NAME, userName)
+            intent.putExtra(Constants.INTELLIGENCE, intelligence)
+            intent.putExtra(Constants.SCORE, score)
+            startActivity(intent)
+            finish()
         }
     }
 
     fun showUsersRelatedTo() {
+        intelligenceDBHelper = SQLLite(this)
         var db: SQLiteDatabase = intelligenceDBHelper.readableDatabase
         val cursor = db?.rawQuery("SELECT * FROM intelligence_history WHERE id != (SELECT MAX(id) FROM intelligence_history)", null)
         var userList = ArrayList<User>()
@@ -57,7 +65,6 @@ class MatchActivity : AppCompatActivity() {
 
         if (userList != null && userList.size > 0) {
             userList = arraySort(userList,userScore)
-            Toast.makeText(this@MatchActivity, "datos: " + userList.size, Toast.LENGTH_SHORT).show()
             var i = 0
             do {
                 val tableRow = LayoutInflater.from(this).inflate(R.layout.table_row, null) as TableRow
@@ -69,12 +76,16 @@ class MatchActivity : AppCompatActivity() {
                 val intelligence = userList[i].intelligence
                 tableRow.findViewById<TextView>(R.id.intelligenceTextView).append(intelligence)
 
+                val score = userList[i].score.toString()
+                tableRow.findViewById<TextView>(R.id.scoreTextView).append(score)
+
                 tableLayout.addView(tableRow)
                 i++
             } while ( i < userList.size)
         }else{
             findViewById<ScrollView>(R.id.scrollview).setVisibility(View.INVISIBLE)
             findViewById<ScrollView>(R.id.scrollview).setLayoutParams(LinearLayout.LayoutParams(20, 50));
+            findViewById<Space>(R.id.s_space).setLayoutParams(LinearLayout.LayoutParams(20, 350));
             findViewById<TextView>(R.id.tv_noUsers).setVisibility(View.VISIBLE)
         }
 

@@ -56,7 +56,14 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
 
         btn_submit.setOnClickListener(this)
         auto.setOnClickListener {
-            autoFill()
+            var s = ""
+            for(i in 0..35) {
+
+                var x = (Math.random() * (9 - 1 + 1)).toInt() + 1
+                setPoints(values[x], i)
+                s = s + " "+ x
+            }
+            //Toast.makeText(this@QuestionsActivity, "$IntelligenceMatrix", Toast.LENGTH_SHORT).show()
             val intent =
                 Intent(this@QuestionsActivity, ResultActivity::class.java)
             intent.putExtra(Constants.USER_NAME, mUserName)
@@ -131,9 +138,7 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
         while(p > 11){
             p = p - 12
         }
-        for(i in 0..11){
-            IntelligenceMatrix!![i].score = IntelligenceMatrix!![i].score  + value + mPoints!![i][p]
-        }
+            IntelligenceMatrix!![p].score += value
     }
 
     private fun selectIntelligence(): String{
@@ -157,8 +162,9 @@ class QuestionsActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun autoFill() {
-        for(i in 0..36) {
-            setPoints(values[(Math.random() * (9 - 0 + 1)).toInt() + 0], i)
+        for(i in 0..35) {
+            var x = (Math.random() * (9 - 1 + 1)).toInt() + 1
+            setPoints(values[x], i)
         }
     }
 }

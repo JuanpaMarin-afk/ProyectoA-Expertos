@@ -7,22 +7,29 @@
 
     <TextView
             android:id="@+id/usernameTextView"
-            android:layout_width="0dp"
+            android:layout_width="106dp"
             android:layout_height="22dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#E4AFAF"
+            android:textColor="#FF811313"
             android:textSize="13sp"/>
 
     <TextView
             android:id="@+id/intelligenceTextView"
-            android:layout_width="0dp"
+            android:layout_width="119dp"
             android:layout_height="22dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#E4AFAF"
+            android:textColor="#FF811313"
             android:textSize="13sp"/>
-
+    <TextView
+            android:id="@+id/scoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FF811313"
+            android:textSize="13sp"/>
 
 
 </TableRow>

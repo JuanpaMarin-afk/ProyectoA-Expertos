@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/ic_bg"
+              android:background="@drawable/istockphoto_948405448_612x612"
               android:orientation="vertical"
               android:gravity="center_horizontal"
               android:padding="20dp"
@@ -39,12 +39,9 @@
             tools:text="Username" android:textAllCaps="true" android:textAlignment="center"/>
 
     <ImageView
-            android:id="@+id/iv_trophy"
-            android:layout_width="104dp"
-            android:layout_height="112dp"
-            android:contentDescription="image"
-            android:src="@drawable/inteligencia" tools:srcCompat="@drawable/inteligencia_emocional"/>
-
+            android:layout_width="130dp"
+            android:layout_height="205dp" app:srcCompat="@drawable/inteligencia_emocional"
+            android:id="@+id/imageView"/>
     <TextView
             android:id="@+id/tv_recomendation"
             android:layout_width="wrap_content"
@@ -58,7 +55,7 @@
     <ScrollView
             android:id="@+id/scrollview"
             android:layout_width="match_parent"
-            android:layout_height="175dp" android:visibility="visible" android:layout_marginTop="10dp">
+            android:layout_height="199dp" android:visibility="visible" android:layout_marginTop="10dp">
 
         <TableLayout
                 android:id="@+id/tableLayout"
@@ -68,24 +65,32 @@
                 android:layout_marginRight="30dp"
                 android:stretchColumns="*">
             <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="332dp"
                     android:layout_height="wrap_content">
                 <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Usuario"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textStyle="bold" android:textColor="#D8A1A1"/>
+                        android:textStyle="bold" android:textColor="#811313"/>
                 <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Inteligencia"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textStyle="bold" android:textColor="#D8A1A1"/>
+                        android:textStyle="bold" android:textColor="#FF811313"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Puntos"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" android:textColor="#FF811313" android:id="@+id/textView"/>
             </TableRow>
         </TableLayout>
 
@@ -103,7 +108,7 @@
             android:gravity="center_horizontal"/>
     <Space
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" android:id="@+id/s_space"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

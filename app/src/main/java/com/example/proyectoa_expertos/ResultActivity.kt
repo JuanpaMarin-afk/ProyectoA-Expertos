@@ -16,19 +16,21 @@ class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
 
         val userName = intent.getStringExtra(Constants.USER_NAME)
+        val intelligence = intent.getStringExtra(Constants.INTELLIGENCE)
+        val score = intent.getStringExtra(Constants.SCORE)
+
         val tv_name = findViewById<TextView>(R.id.tv_name)
         tv_name.text = userName
-
-        val intelligence = intent.getStringExtra(Constants.INTELLIGENCE)
-        val score = intent.getStringExtra(Constants.SCORE)?.toInt()
-
         val tv_intelligence = findViewById<TextView>(R.id.tv_intelligence)
-        tv_intelligence.text = "$intelligence"
+        tv_intelligence.text = intelligence
+        val tv_score = findViewById<TextView>(R.id.tv_score)
+        tv_score.text = score
 
-        //var db: SQLiteDatabase? = intelligenceDBHelper.readableDatabase
-        //val cursor = db?.rawQuery("SELECT * FROM intelligence_history WHERE id = (SELECT MAX(id) FROM intelligence_history)", null)
+        intelligenceDBHelper = SQLLite(this)
+        var db: SQLiteDatabase? = intelligenceDBHelper.readableDatabase
+        val cursor = db?.rawQuery("SELECT * FROM intelligence_history WHERE id = (SELECT MAX(id) FROM intelligence_history)", null)
         var lastUser: User? = User("a","a",0) //null
-        /*if (cursor != null) {
+        if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     val username = cursor.getString(1).toString()
@@ -37,21 +39,25 @@ class ResultActivity : AppCompatActivity() {
                     lastUser = User(username,intelligence,score)
                 } while (cursor.moveToNext())
             }
-        }*/
+        }
 
         //Add to the BD the username and the intelligence
         if(lastUser != null){
-            if(lastUser.username != userName && lastUser.intelligence != intelligence && lastUser.score != score){
-                intelligenceDBHelper = SQLLite(this)
+           if(lastUser.username != userName || lastUser.intelligence != intelligence || lastUser.score != score?.toInt()) {
                 if (userName != null && intelligence != null && score != null) {
-                    //intelligenceDBHelper.addData(userName, intelligence, score)
+                    intelligenceDBHelper.addData(userName, intelligence, score.toInt())
                 }
             }
         }
 
         val btn_match = findViewById<Button>(R.id.btn_match)
         btn_match.setOnClickListener {
-            startActivity(Intent(this@ResultActivity, MatchActivity::class.java))
+            val intent = Intent(this@ResultActivity, MatchActivity::class.java)
+            intent.putExtra(Constants.USER_NAME, userName)
+            intent.putExtra(Constants.INTELLIGENCE, intelligence)
+            intent.putExtra(Constants.SCORE, score)
+            startActivity(intent)
+            finish()
         }
 
         val btn_finish = findViewById<Button>(R.id.btn_finish)

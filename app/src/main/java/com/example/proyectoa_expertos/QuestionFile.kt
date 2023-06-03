@@ -9,18 +9,18 @@ object Constants {
     fun getPoints(): Array<Array<Int>> {
         val array = arrayOf(
         // Inteligencias        Que_Id:    1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12
-        /*Lingüística Verbal    */arrayOf( 1,-1,-3,-3,-2,-3,-3,-2,-1, 0,-2,-1),
-        /*Logica-Matematica     */arrayOf(-1, 1,-1,-2,-2,-2,-2,-1,-3,-1,-3,-2),
-        /*Espacial              */arrayOf(-3, 0, 1,-2,-1,-3,-3, 0,-3, 0,-3,-3),
-        /*Musical               */arrayOf(-3,-2,-3, 1, 0,-1,-1,-2,-2, 0,-1,-1),
-        /*Corporal-Cinestésica  */arrayOf(-3,-3,-1,-1, 1, 0,-1,-3,-3,-2,-2,-2),
-        /*Intrapersonal         */arrayOf(-3,-1,-2,-2,-2, 1, 0,-1,-1,-1, 0, 0),
-        /*Interpersonal         */arrayOf(-3,-1,-2,-2,-2, 0, 1,-1,-1,-1, 0, 0),
-        /*Naturalista           */arrayOf(-3,-3,-1,-1,-3,-2,-1, 1,-2,-2,-2,-2),
-        /*Existencial           */arrayOf(-3,-3, 0,-3,-3,-1,-1, 0, 1, 0,-2,-1),
-        /*Creativa              */arrayOf(-1,-1,-3, 0,-2,-1,-1,-1,-1, 1,-1,-2),
-        /*Emocional             */arrayOf(-2,-3,-3,-2,-2, 0, 0, 0, 0,-1, 1,-2),
-        /*Colaborativa          */arrayOf(-2,-1,-2,-1,-1,-2, 0,-2,-2,-2,-1, 1)
+        /*Lingüística Verbal    */arrayOf( 0,-3,-4,-3,-3,-2,-3,-2,-1,-1,-2,-2),
+        /*Logica-Matematica     */arrayOf(-3, 0,-3,-3,-3,-2,-2,-2,-1,-1,-2,-2),
+        /*Espacial              */arrayOf(-4,-3, 0,-4,-3,-2,-2,-1,-1,-1,-2,-2),
+        /*Musical               */arrayOf(-3,-3,-4, 0,-3,-2,-1,-1,-1,-1,-2,-2),
+        /*Corporal-Cinestésica  */arrayOf(-3,-3,-3,-3, 0,-2,-2,-1,-1,-1,-2,-2),
+        /*Intrapersonal         */arrayOf(-2,-2,-2,-2,-2, 0,-5,-1,-1,-1,-2,-5),
+        /*Interpersonal         */arrayOf(-2,-2,-2,-2,-2,-5, 0,-1,-1,-1,-2,-5),
+        /*Naturalista           */arrayOf(-2,-2,-1,-1,-1,-1,-1, 0,-1,-1,-1,-1),
+        /*Existencial           */arrayOf(-1,-1, 1,-1,-1,-1,-1,-1, 0,-1,-1,-1),
+        /*Creativa              */arrayOf(-1,-1,-1, 1,-1,-1,-1,-1,-1, 0,-1,-1),
+        /*Emocional             */arrayOf(-2,-2,-2,-2,-2,-2,-2,-1,-1,-1, 0,-2),
+        /*Colaborativa          */arrayOf(-2,-2,-2,-2,-2,-5,-5,-1,-1,-1,-2, 0)
 )
 
 
