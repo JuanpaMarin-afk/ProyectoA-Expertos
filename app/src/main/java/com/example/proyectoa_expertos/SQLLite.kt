@@ -14,7 +14,7 @@ class SQLLite(context: Context) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         val orderCreation = "CREATE TABLE intelligence_history " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "username VARCHAR(100), intelligence VARCHAR(100))"
+                "username VARCHAR(100), intelligence VARCHAR(100), score INTEGER)"
         db?.execSQL(orderCreation)
     }
 
@@ -24,11 +24,12 @@ class SQLLite(context: Context) : SQLiteOpenHelper(
         //onCreate(db)
     }
 
-    fun addData(username: String, intelligence: String): String{
+    fun addData(username: String, intelligence: String, score: Int): String{
         val db = this.writableDatabase
         val data = ContentValues()
         data.put("username", username)
         data.put("intelligence", intelligence)
+        data.put("score", score)
 
         var result = db.insert("intelligence_history", null, data)
         if(result == -1.toLong()){
@@ -50,7 +51,8 @@ class SQLLite(context: Context) : SQLiteOpenHelper(
             do {
                 var username = result.getString(result.getColumnIndex("username"))
                 var intelligence = result.getString(result.getColumnIndex("intelligence"))
-                var user = User(username,intelligence)
+                var score = result.getInt(result.getColumnIndex("score"))
+                var user = User(username,intelligence,score)
                 list.add(user)
             } while (result.moveToNext())
             result.close()

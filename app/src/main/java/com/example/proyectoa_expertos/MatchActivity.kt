@@ -3,65 +3,33 @@ package com.example.proyectoa_expertos
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
-
-class ResultActivity : AppCompatActivity() {
-
-    lateinit var binding: ResultActivity
+class MatchActivity : AppCompatActivity() {
+    lateinit var binding: MatchActivity
     lateinit var intelligenceDBHelper: SQLLite
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        setContentView(R.layout.activity_match)
 
         val userName = intent.getStringExtra(Constants.USER_NAME)
         val tv_name = findViewById<TextView>(R.id.tv_name)
         tv_name.text = userName
 
-        val intelligence = intent.getStringExtra(Constants.INTELLIGENCE)
-        val score = intent.getStringExtra(Constants.SCORE)?.toInt()
+        //Show Table Users Related To
+        showUsersRelatedTo()
 
-        val tv_intelligence = findViewById<TextView>(R.id.tv_intelligence)
-        tv_intelligence.text = "$intelligence"
-
-        //var db: SQLiteDatabase? = intelligenceDBHelper.readableDatabase
-        //val cursor = db?.rawQuery("SELECT * FROM intelligence_history WHERE id = (SELECT MAX(id) FROM intelligence_history)", null)
-        var lastUser: User? = User("a","a",0) //null
-        /*if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    val username = cursor.getString(1).toString()
-                    val intelligence = cursor.getString(2).toString()
-                    val score = cursor.getInt(3)
-                    lastUser = User(username,intelligence,score)
-                } while (cursor.moveToNext())
-            }
-        }*/
-
-        //Add to the BD the username and the intelligence
-        if(lastUser != null){
-            if(lastUser.username != userName && lastUser.intelligence != intelligence && lastUser.score != score){
-                intelligenceDBHelper = SQLLite(this)
-                if (userName != null && intelligence != null && score != null) {
-                    //intelligenceDBHelper.addData(userName, intelligence, score)
-                }
-            }
-        }
-
-        val btn_match = findViewById<Button>(R.id.btn_match)
-        btn_match.setOnClickListener {
-            startActivity(Intent(this@ResultActivity, MatchActivity::class.java))
-        }
-
-        val btn_finish = findViewById<Button>(R.id.btn_finish)
-        btn_finish.setOnClickListener {
-            startActivity(Intent(this@ResultActivity, MainActivity::class.java))
+        val btn_back = findViewById<Button>(R.id.btn_back)
+        btn_back.setOnClickListener {
+            startActivity(Intent(this@MatchActivity, ResultActivity::class.java))
         }
     }
-    /*
+
     fun showUsersRelatedTo() {
-        var db: SQLiteDatabase? = intelligenceDBHelper.readableDatabase
+        var db: SQLiteDatabase = intelligenceDBHelper.readableDatabase
         val cursor = db?.rawQuery("SELECT * FROM intelligence_history WHERE id != (SELECT MAX(id) FROM intelligence_history)", null)
         var userList = ArrayList<User>()
         if (cursor != null) {
@@ -77,21 +45,19 @@ class ResultActivity : AppCompatActivity() {
             }
         }
         db = intelligenceDBHelper.readableDatabase
-        val cursor2 = db?.rawQuery("SELECT score FROM intelligence_history WHERE id = (SELECT MAX(id) FROM intelligence_history)", null)
+        val cursor2 = db.rawQuery("SELECT score FROM intelligence_history WHERE id = (SELECT MAX(id) FROM intelligence_history)", null)
         var userScore = 0
         if (cursor2 != null) {
             if (cursor2.moveToFirst()) {
                 do {
-                     userScore = cursor2.getInt(0)
+                    userScore = cursor2.getInt(0)
                 } while (cursor2.moveToNext())
             }
         }
 
-
-
         if (userList != null && userList.size > 0) {
             userList = arraySort(userList,userScore)
-            Toast.makeText(this@ResultActivity, "datos: " + userList.size, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MatchActivity, "datos: " + userList.size, Toast.LENGTH_SHORT).show()
             var i = 0
             do {
                 val tableRow = LayoutInflater.from(this).inflate(R.layout.table_row, null) as TableRow
@@ -147,5 +113,21 @@ class ResultActivity : AppCompatActivity() {
             return b
         }
         return b
-    }*/
+    }
+    private fun lastUser(): User? {
+        var db: SQLiteDatabase? = intelligenceDBHelper.readableDatabase
+        val cursor = db?.rawQuery("SELECT * FROM intelligence_history WHERE id = (SELECT MAX(id) FROM intelligence_history)", null)
+        var user: User? = null
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    val username = cursor.getString(1).toString()
+                    val intelligence = cursor.getString(2).toString()
+                    val score = cursor.getInt(3)
+                    user = User(username,intelligence,score)
+                } while (cursor.moveToNext())
+            }
+        }
+        return user
+    }
 }

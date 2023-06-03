@@ -17,9 +17,20 @@
             android:padding="16dp">
 
         <TextView
+                android:id="@+id/titleEscala"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:text="En una escala de 1 a 10, con 1 como minimo"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:textAllCaps="true" android:clickable="true"/>
+        <TextView
                 android:id="@+id/tv_question"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="210dp"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:textColor="#FFFFFF"
