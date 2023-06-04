@@ -17,7 +17,7 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Felicidades por finalizar el test !!!"
+            android:text="Felicidades por finalizar el test"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" android:textAllCaps="true" android:textAlignment="center"/>
@@ -76,7 +76,7 @@
             android:textColor="@android:color/secondary_text_dark"
             android:textSize="18sp"
             android:textAllCaps="true" android:textAlignment="center"
-            android:visibility="visible" android:text="Con un puntaje de : "/>
+            android:visibility="visible" android:text="Con un puntaje de: "/>
     <TextView
             android:id="@+id/tv_score"
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/black"
-            android:text="ver matches"
+            android:text="ver tú afinidad con otros usuarios 👀"
             android:textColor="@android:color/white"
             android:textSize="18sp"
     />

@@ -14,13 +14,20 @@
             android:id="@+id/tv_app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test Inteligencias"
+            android:text="Test de Inteligencias"
             android:gravity="center"
             android:layout_marginBottom="30dp"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:textAllCaps="true"/>
+    <ImageView
+            android:id="@+id/iv_trophy2"
+            android:layout_width="290dp"
+            android:layout_height="204dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="image"
+            android:src="@drawable/inteligencia" android:clickable="true"/>
 
     <androidx.cardview.widget.CardView
             android:id="@+id/cv_main"
@@ -54,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_marginTop="16dp"
-                    android:text="Ingresa tu nombre!"
+                    android:text="Ingresa tu nombre"
                     android:textColor="#7A8089"
                     android:textSize="16sp" android:textAllCaps="true"/>
 
@@ -82,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:background="@color/black"
-                    android:text="Iniciar"
+                    android:text="Comenzar"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"/>
 
